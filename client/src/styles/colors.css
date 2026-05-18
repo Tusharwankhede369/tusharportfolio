@@ -1,0 +1,165 @@
+/**
+ * Portfolio theme — warm charcoal (dark) + soft sand (light).
+ * No navy / bright blue UI.
+ */
+
+html.dark {
+  --bg-primary: #071B4A;
+  --bg-secondary: #08112f;
+  --bg-card: rgba(9, 25, 60, 0.78);
+  --bg-card-hover: rgba(8, 22, 59, 0.94);
+
+  --text-primary: #eef6ff;
+  --text-secondary: #c8e6ff;
+  --text-muted: #99c8ff;
+
+  --accent-primary: #00AEEF;
+  --accent-secondary: #FF4FA3;
+  --accent-tertiary: #9B5DE5;
+  --accent-success: #6A1B9A;
+  --accent-warning: #FF4FA3;
+  --accent-danger: #FF4FA3;
+
+  --border-color: rgba(0, 174, 239, 0.22);
+  --border-color-light: rgba(155, 93, 229, 0.14);
+
+  --gradient-primary: linear-gradient(135deg, #00AEEF 0%, #9B5DE5 45%, #FF4FA3 100%);
+  --gradient-hero: radial-gradient(circle at 12% 14%, rgba(0, 174, 239, 0.24), transparent 24%),
+    radial-gradient(circle at 90% 8%, rgba(255, 79, 163, 0.18), transparent 24%),
+    radial-gradient(circle at 28% 76%, rgba(155, 93, 229, 0.16), transparent 28%),
+    linear-gradient(180deg, #071B4A 0%, #050a27 100%);
+
+  --color-bg: var(--bg-primary);
+  --color-surface: var(--bg-card);
+  --color-surface-hover: var(--bg-card-hover);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-secondary);
+  --color-border: var(--border-color);
+  --color-primary: var(--accent-primary);
+  --color-secondary: var(--accent-secondary);
+  --color-accent: var(--accent-tertiary);
+  --hero-gradient: var(--gradient-hero);
+}
+
+html.light {
+  --bg-primary: #EBDBC4;
+  --bg-secondary: #f2e6d3;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
+
+  --text-primary: #1d1b26;
+  --text-secondary: #4f4a6d;
+  --text-muted: #6e6b8b;
+
+  --accent-primary: #00AEEF;
+  --accent-secondary: #FF4FA3;
+  --accent-tertiary: #9B5DE5;
+  --accent-success: #6A1B9A;
+  --accent-warning: #FF4FA3;
+  --accent-danger: #FF4FA3;
+
+  --border-color: rgba(15, 23, 42, 0.12);
+  --border-color-light: rgba(155, 93, 229, 0.1);
+
+  --gradient-primary: linear-gradient(135deg, #00AEEF 0%, #9B5DE5 45%, #FF4FA3 100%);
+  --gradient-hero: linear-gradient(160deg, #EBDBC4 0%, #f2e6d3 45%, #fff7ee 100%);
+
+  --color-bg: var(--bg-primary);
+  --color-surface: var(--bg-card);
+  --color-surface-hover: var(--bg-card-hover);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-secondary);
+  --color-border: var(--border-color);
+  --color-primary: var(--accent-primary);
+  --color-secondary: var(--accent-secondary);
+  --color-accent: var(--accent-tertiary);
+  --hero-gradient: var(--gradient-hero);
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes hero-ring {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.12;
+  }
+}
+
+@keyframes hero-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
+.hero-image-shell {
+  position: relative;
+  width: min(280px, 85vw);
+  height: min(280px, 85vw);
+  margin-inline: auto;
+}
+
+.hero-image-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-primary) 45%, transparent) 0%,
+    transparent 68%
+  );
+  animation: hero-glow 3.5s ease-in-out infinite;
+  z-index: 0;
+}
+
+.hero-image-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--color-primary) 45%, transparent);
+  animation: hero-ring 2.8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-image-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid color-mix(in srgb, var(--color-primary) 80%, transparent);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  animation: hero-float 3.2s ease-in-out infinite;
+}
+
+.hero-profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nav-link {
+  color: var(--color-text-muted);
+}
+.nav-link:hover {
+  color: var(--color-text);
+}
