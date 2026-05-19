@@ -18,4 +18,7 @@ export default defineConfig({
       '/uploads': 'http://127.0.0.1:5000',
     },
   },
+  build: {
+    chunkSizeWarningLimit: 2500,
+  },
 });

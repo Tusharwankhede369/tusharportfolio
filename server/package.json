@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
+    "build": "echo 'No build step required for server'",
     "seed": "node src/seeds/runSeed.js",
     "seed:force": "node src/seeds/runSeed.js --force"
   },
