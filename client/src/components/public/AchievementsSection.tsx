@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { format } from 'date-fns';
 import { SectionHeading } from '@/components/public/SectionHeading';
 import { useAchievements } from '@/hooks/queries';
+import { formatDate } from '@/lib/utils';
 
 export function AchievementsSection() {
   const { data: items } = useAchievements();
@@ -48,7 +48,7 @@ export function AchievementsSection() {
                     {a.organization}
                   </p>
                   <p className="mt-auto text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    {a.date ? format(new Date(a.date), 'MMM yyyy') : ''}
+                    {formatDate(a.date)}
                     {a.awardType ? ` · ${a.awardType}` : ''}
                   </p>
                 </div>

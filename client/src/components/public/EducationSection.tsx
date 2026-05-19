@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { GraduationCap, MapPin } from 'lucide-react';
-import { format } from 'date-fns';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { SectionHeading } from '@/components/public/SectionHeading';
 import { useEducation } from '@/hooks/queries';
+import { formatDate } from '@/lib/utils';
 
 export function EducationSection() {
   const { data: items } = useEducation();
@@ -77,8 +77,8 @@ export function EducationSection() {
                         className="rounded-full px-3 py-1 text-xs font-medium"
                         style={{ background: 'var(--color-surface-hover)', color: 'var(--color-text-muted)' }}
                       >
-                        {e.startDate ? format(new Date(e.startDate), 'MMM yyyy') : ''} —{' '}
-                        {e.endDate ? format(new Date(e.endDate), 'MMM yyyy') : 'Present'}
+                        {formatDate(e.startDate)} —{' '}
+                        {e.endDate ? formatDate(e.endDate) : 'Present'}
                       </span>
                     </div>
                     <p className="mt-3 font-medium" style={{ color: 'var(--color-text)' }}>

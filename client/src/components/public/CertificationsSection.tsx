@@ -2,9 +2,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { motion } from 'framer-motion';
 import { Download, ExternalLink, FileText, X } from 'lucide-react';
 import { useState } from 'react';
-import { format } from 'date-fns';
 import { SectionHeading } from '@/components/public/SectionHeading';
 import { useCertifications } from '@/hooks/queries';
+import { formatDate } from '@/lib/utils';
 import type { CertificationItem } from '@/types/portfolio';
 
 export function CertificationsSection() {
@@ -68,7 +68,7 @@ export function CertificationsSection() {
               </div>
 
               <p className="mt-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                {c.issueDate ? format(new Date(c.issueDate), 'MMM yyyy') : ''}
+                {formatDate(c.issueDate)}
               </p>
 
               {c.description ? (

@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import { Briefcase } from 'lucide-react';
-import { format } from 'date-fns';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { SectionHeading } from '@/components/public/SectionHeading';
 import { useExperience } from '@/hooks/queries';
-import { cn } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 
 function formatType(t?: string) {
   if (!t) return '';
@@ -93,8 +92,8 @@ export function ExperienceSection() {
                         className="rounded-full border px-3 py-1 text-[11px] font-medium whitespace-nowrap"
                         style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
                       >
-                        {job.startDate ? format(new Date(job.startDate), 'MMM yyyy') : ''} —{' '}
-                        {job.endDate ? format(new Date(job.endDate), 'MMM yyyy') : 'Present'}
+                        {formatDate(job.startDate)} —{' '}
+                        {job.endDate ? formatDate(job.endDate) : 'Present'}
                       </p>
                     </div>
 

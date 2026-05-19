@@ -27,6 +27,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { api } from '@/lib/api';
+import { formatDate } from '@/lib/utils';
 import { AboutPanel } from '@/pages/admin/panels/aboutPanel';
 import { ProjectsPanel } from '@/pages/admin/panels/projectsPanel';
 import { CertificationsPanel } from '@/pages/admin/panels/certificationsPanel';
@@ -229,7 +230,7 @@ export function AdminDashboard() {
                           <span className="text-slate-500">·</span> {a.resource}
                         </p>
                         <p className="mt-1 text-[11px] text-slate-500">
-                          {new Date(a.at).toLocaleString()}
+                          {a.at ? formatDate(a.at, 'Pp') : ''}
                         </p>
                       </div>
                     ))
