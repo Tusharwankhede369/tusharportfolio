@@ -19,7 +19,7 @@ fs.mkdirSync(uploadDir, { recursive: true });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const clientOrigin = process.env.CLIENT_URL || 'http://localhost:5173';
+const clientOrigin = (process.env.CLIENT_URL || 'http://localhost:5173').replace(/\/$/, '');
 
 app.set('trust proxy', 1);
 // Avoid 304 + empty body in browsers/XHR — breaks SPA JSON clients (React Query)
