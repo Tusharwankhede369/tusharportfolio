@@ -17,8 +17,17 @@ function normalizeUploadsPaths(req, value) {
       Object.entries(value).map(([key, val]) => [key, normalizeUploadsPaths(req, val)])
     );
   }
-  if (typeof value === 'string' && value.startsWith('/uploads/')) {
-    return `${req.protocol}://${req.get('host')}${value}`;
+  if (typeof value === 'string') {
+    const path = value.trim();
+    const uploadsUrl = `${req.protocol}://${req.get('host')}`;
+    if (path.startsWith('/uploads/')) {
+      return `${uploadsUrl}${path}`;
+    }
+    const localUploadMatch = path.match(/^https?:\/\/(?:127\.0\.0\.1|localhost):5000(\/uploads\/.*)$/);
+    if (localUploadMatch) {
+      return `${uploadsUrl}${localUploadMatch[1]}`;
+    }
+    return path;
   }
   return value;
 }
