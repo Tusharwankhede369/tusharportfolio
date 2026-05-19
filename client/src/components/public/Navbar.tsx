@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { SiteLogo } from '@/components/brand/SiteLogo';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -81,9 +82,9 @@ export function Navbar() {
             {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </Button>
           <Button asChild variant="outline" size="sm" className="hidden rounded-xl font-semibold md:inline-flex">
-            <a href="/admin/login" style={{ color: 'var(--color-text)' }}>
+            <Link to="/admin/login" style={{ color: 'var(--color-text)' }}>
               Admin
-            </a>
+            </Link>
           </Button>
           <Button type="button" variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen((v) => !v)} aria-label="Menu">
             <Menu />
@@ -116,14 +117,14 @@ export function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <a
-                href="/admin/login"
+              <Link
+                to="/admin/login"
                 className="mt-2 rounded-xl px-3 py-2 text-sm font-medium"
                 style={{ color: 'var(--color-primary)' }}
                 onClick={() => setOpen(false)}
               >
                 Admin
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

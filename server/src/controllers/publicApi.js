@@ -7,9 +7,25 @@ import { Certification } from '../models/Certification.js';
 import { Education } from '../models/Education.js';
 import { Settings } from '../models/Settings.js';
 
+function normalizeUploadsPaths(req, value) {
+  if (value == null) return value;
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeUploadsPaths(req, item));
+  }
+  if (typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, val]) => [key, normalizeUploadsPaths(req, val)])
+    );
+  }
+  if (typeof value === 'string' && value.startsWith('/uploads/')) {
+    return `${req.protocol}://${req.get('host')}${value}`;
+  }
+  return value;
+}
+
 export async function getAbout(_req, res) {
   const doc = await About.findOne().lean();
-  res.json(doc || {});
+  res.json(normalizeUploadsPaths(_req, doc) || {});
 }
 
 export async function getProjects(req, res) {
@@ -25,7 +41,7 @@ export async function getProjects(req, res) {
     }
   }
   const list = await Project.find(q).sort({ order: 1, createdAt: -1 }).lean();
-  res.json(list);
+  res.json(normalizeUploadsPaths(req, list));
 }
 
 export async function getSkills(_req, res) {
@@ -35,7 +51,7 @@ export async function getSkills(_req, res) {
 
 export async function getExperience(_req, res) {
   const list = await Experience.find({ published: true }).sort({ order: 1 }).lean();
-  res.json(list);
+  res.json(normalizeUploadsPaths(_req, list));
 }
 
 export async function getAchievements(_req, res) {
@@ -45,7 +61,7 @@ export async function getAchievements(_req, res) {
   })
     .sort({ order: 1 })
     .lean();
-  res.json(list);
+  res.json(normalizeUploadsPaths(_req, list));
 }
 
 export async function getCertifications(_req, res) {
@@ -55,12 +71,12 @@ export async function getCertifications(_req, res) {
   })
     .sort({ order: 1 })
     .lean();
-  res.json(list);
+  res.json(normalizeUploadsPaths(_req, list));
 }
 
 export async function getEducation(_req, res) {
   const list = await Education.find().sort({ order: 1 }).lean();
-  res.json(list);
+  res.json(normalizeUploadsPaths(_req, list));
 }
 
 export async function getSettingsPublic(_req, res) {
@@ -70,7 +86,7 @@ export async function getSettingsPublic(_req, res) {
     seo: s.seo || {},
     theme: s.theme || {},
     animationsEnabled: s.animationsEnabled !== false,
-    resumePdfUrl: s.resumePdfUrl || '',
+    resumePdfUrl: normalizeUploadsPaths(_req, s.resumePdfUrl) || '',
     socialLinks: s.socialLinks || {},
   });
 }
